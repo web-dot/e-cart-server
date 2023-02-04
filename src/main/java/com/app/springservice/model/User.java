@@ -7,13 +7,14 @@ import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.app.springservice.model.Role;
 
 @Document(collection="users_collection")
 public class User {
 	
 	@Id
 	private String id;
-	@Indexed(unique=true, direction=IndexDirection.DESCENDING.ASCENDING, dropDups=true )
+	@Indexed(unique=true, direction=IndexDirection.ASCENDING, dropDups=true )
 	
 	private String email;
 	private String name;

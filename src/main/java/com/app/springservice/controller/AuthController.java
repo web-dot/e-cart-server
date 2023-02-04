@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import com.app.springservice.dto.AuthenticationResponse;
 import com.app.springservice.repository.UserRepository;
 import com.app.springservice.service.MyUserDetailsService;
 import com.app.springservice.util.JwtUtil;
+
 
 @CrossOrigin("*")
 @RestController
@@ -40,6 +42,11 @@ public class AuthController {
 		return "hello world";
 	}
 	
+	@GetMapping("/helloaws")
+	public String awsHello() {
+		return "Hi AWS";
+	}
+	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
 		try {
@@ -48,7 +55,8 @@ public class AuthController {
 					);
 			System.err.println(authenticationRequest.getUsername());
 		}
-		catch(BadCredentialsException e) {
+		catch(Exception e) {
+			e.printStackTrace();
 			throw new Exception("Incorrect username or password");
 		}
 		
